@@ -47,7 +47,6 @@ const chartData = {
 document.addEventListener('DOMContentLoaded', function() {
     initializeMarketSizeChart();
     initializeROIChart();
-    animateCounterNumbers();
     setupScrollAnimations();
 });
 
@@ -283,68 +282,7 @@ function initializeROIChart() {
     });
 }
 
-// Animate counter numbers
-function animateCounterNumbers() {
-    const counters = document.querySelectorAll('.big-number, .stat-value, .roi-value, .market-share');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-    
-    counters.forEach(counter => {
-        observer.observe(counter);
-    });
-}
-
-function animateCounter(element) {
-    const text = element.textContent;
-    const hasPercent = text.includes('%');
-    const hasDollar = text.includes('$') || text.includes('¥');
-    const hasB = text.includes('B');
-    const hasM = text.includes('M');
-    const hasK = text.includes('K');
-    
-    // Extract number from text
-    let number = parseFloat(text.replace(/[^0-9.]/g, ''));
-    if (isNaN(number)) return;
-    
-    const duration = 2000;
-    const steps = 60;
-    const increment = number / steps;
-    const stepDuration = duration / steps;
-    
-    let current = 0;
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= number) {
-            current = number;
-            clearInterval(timer);
-        }
-        
-        let displayText = Math.round(current).toLocaleString();
-        
-        // Add back the original formatting
-        if (hasDollar && text.startsWith('$')) displayText = '$' + displayText;
-        if (hasDollar && text.startsWith('¥')) displayText = '¥' + displayText;
-        if (hasB) displayText += 'B';
-        if (hasM) displayText += 'M';
-        if (hasK) displayText += 'K';
-        if (hasPercent) displayText += '%';
-        
-        // Special cases for text-based values
-        if (text.includes('インド') || text.includes('Same Day') || text.includes('今すぐ')) {
-            displayText = text;
-            clearInterval(timer);
-        }
-        
-        element.textContent = displayText;
-    }, stepDuration);
-}
+// Counter animation removed per user request
 
 // Setup scroll animations
 function setupScrollAnimations() {

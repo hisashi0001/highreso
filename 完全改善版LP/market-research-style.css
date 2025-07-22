@@ -13,6 +13,11 @@ body {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
+/* Chart Canvas Height Control */
+canvas {
+    max-height: 300px !important;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -140,6 +145,7 @@ body {
 
 .chart-container {
     max-width: 800px;
+    height: 400px;
     margin: 0 auto 3rem;
     background: white;
     padding: 2rem;
@@ -684,6 +690,7 @@ body {
 
 .roi-chart-container {
     max-width: 800px;
+    height: 400px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.1);
     padding: 2rem;
